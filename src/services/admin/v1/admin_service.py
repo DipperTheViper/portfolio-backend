@@ -6,12 +6,14 @@ from fastapi import APIRouter, Depends
 
 from src.configs.containers import ServiceContainer
 from src.logics.admin.admin_logic import AdminLogic
+from src.logics.contact.contact_logic import ContactLogic
 from src.logics.content.content_logic import ContentLogic
 from src.models.dtos.admin.domain.v1.admin_domain_interface_dtos import (
     GetAdminInputDTOV1,
     GetAdminOutputDTOV1,
     SearchAdminOutputDTOV1,
 )
+from src.models.dtos.contact.domain.v1.contact_domain_interface_dtos import SearchContactMessageOutputDTOV1
 from src.models.dtos.content.domain.v1.content_domain_interface_dtos import (
     CreateAboutOutputDTOV1,
     CreateExperienceInputDTOV1,
@@ -253,3 +255,14 @@ async def delete_skill(
 ) -> None:
     input_dto = DeleteSkillInputDTOV1(skill_uuid=skill_uuid)
     await logic.delete_skill(input_dto=input_dto)
+
+
+@routerV1.get(
+    path="/contact-messages",
+    response_model=SearchContactMessageOutputDTOV1,
+)
+@inject
+async def search_contact_messages(
+    logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
+) -> SearchContactMessageOutputDTOV1:
+    return await logic.search_contact_messages()
