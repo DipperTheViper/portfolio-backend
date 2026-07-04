@@ -12,26 +12,25 @@ from src.services.file.v1 import file_service
 
 
 def set_dispatch_routes(app: FastAPI) -> None:
-    # TODO: wire up public/user authentication once that feature is built.
     common_private_response = BaseUtils.get_fastapi_exception_responses(
         [UnauthenticatedError, UnknownError, UnavailableError, InvalidArgumentError],
     )
 
     app.include_router(
         router=contact_service.routerV1,
-        prefix="/api/v1/users",
+        prefix="/api/v1/contact",
         responses=common_private_response,
     )
 
     app.include_router(
         router=content_service.routerV1,
-        prefix="/api/v1/users",
+        prefix="/api/v1/content",
         responses=common_private_response,
     )
 
     app.include_router(
         router=file_service.routerV1,
-        prefix="/api/v1/users",
+        prefix="/api/v1/file",
         responses=common_private_response,
     )
 
