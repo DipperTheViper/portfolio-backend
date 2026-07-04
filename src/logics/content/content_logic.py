@@ -1,88 +1,57 @@
 from archipy.helpers.decorators.sqlalchemy_atomic import async_postgres_sqlalchemy_atomic_decorator
-from uuid import UUID
 
 from src.models.dtos.content.domain.v1.content_domain_interface_dtos import (
     CreateAboutInputDTOV1,
     CreateAboutOutputDTOV1,
-    GetAboutInputDTOV1,
-    GetAboutOutputDTOV1,
     UpdateAboutInputDTOV1,
     DeleteAboutInputDTOV1,
-    SearchAboutInputDTOV1,
     SearchAboutOutputDTOV1,
     CreateExperienceInputDTOV1,
     CreateExperienceOutputDTOV1,
-    GetExperienceInputDTOV1,
-    GetExperienceOutputDTOV1,
     UpdateExperienceInputDTOV1,
     DeleteExperienceInputDTOV1,
-    SearchExperienceInputDTOV1,
     SearchExperienceOutputDTOV1,
     CreateHonorInputDTOV1,
     CreateHonorOutputDTOV1,
-    GetHonorInputDTOV1,
-    GetHonorOutputDTOV1,
     UpdateHonorInputDTOV1,
     DeleteHonorInputDTOV1,
-    SearchHonorInputDTOV1,
     SearchHonorOutputDTOV1,
     CreateProjectInputDTOV1,
     CreateProjectOutputDTOV1,
-    GetProjectInputDTOV1,
-    GetProjectOutputDTOV1,
     UpdateProjectInputDTOV1,
     DeleteProjectInputDTOV1,
-    SearchProjectInputDTOV1,
     SearchProjectOutputDTOV1,
     CreateSkillInputDTOV1,
     CreateSkillOutputDTOV1,
-    GetSkillInputDTOV1,
-    GetSkillOutputDTOV1,
     UpdateSkillInputDTOV1,
     DeleteSkillInputDTOV1,
-    SearchSkillInputDTOV1,
     SearchSkillOutputDTOV1,
 )
 from src.models.dtos.content.repository.content_repository_interface_dtos import (
     CreateAboutCommandDTO,
     CreateAboutResponseDTO,
-    GetAboutQueryDTO,
-    GetAboutResponseDTO,
     UpdateAboutCommandDTO,
     DeleteAboutCommandDTO,
-    SearchAboutQueryDTO,
     SearchAboutResponseDTO,
     CreateExperienceCommandDTO,
     CreateExperienceResponseDTO,
-    GetExperienceQueryDTO,
-    GetExperienceResponseDTO,
     UpdateExperienceCommandDTO,
     DeleteExperienceCommandDTO,
-    SearchExperienceQueryDTO,
     SearchExperienceResponseDTO,
     CreateHonorCommandDTO,
     CreateHonorResponseDTO,
-    GetHonorQueryDTO,
-    GetHonorResponseDTO,
     UpdateHonorCommandDTO,
     DeleteHonorCommandDTO,
-    SearchHonorQueryDTO,
     SearchHonorResponseDTO,
     CreateProjectCommandDTO,
     CreateProjectResponseDTO,
-    GetProjectQueryDTO,
-    GetProjectResponseDTO,
     UpdateProjectCommandDTO,
     DeleteProjectCommandDTO,
-    SearchProjectQueryDTO,
     SearchProjectResponseDTO,
     CreateSkillCommandDTO,
     CreateSkillResponseDTO,
-    GetSkillQueryDTO,
-    GetSkillResponseDTO,
     UpdateSkillCommandDTO,
     DeleteSkillCommandDTO,
-    SearchSkillQueryDTO,
     SearchSkillResponseDTO,
 )
 from src.repositories.content.content_repository import ContentRepository
@@ -102,15 +71,8 @@ class ContentLogic:
         return CreateAboutOutputDTOV1.model_validate(obj=response)
 
     @async_postgres_sqlalchemy_atomic_decorator
-    async def get_about(self, input_dto: GetAboutInputDTOV1) -> GetAboutOutputDTOV1:
-        query = GetAboutQueryDTO.model_validate(obj=input_dto)
-        response: GetAboutResponseDTO = await self._repository.get_about(input_dto=query)
-        return GetAboutOutputDTOV1.model_validate(obj=response)
-
-    @async_postgres_sqlalchemy_atomic_decorator
-    async def search_abouts(self, input_dto: SearchAboutInputDTOV1) -> SearchAboutOutputDTOV1:
-        repository_dto = SearchAboutQueryDTO.model_validate(input_dto)
-        response: SearchAboutResponseDTO = await self._repository.search_abouts(input_dto=repository_dto)
+    async def search_abouts(self) -> SearchAboutOutputDTOV1:
+        response: SearchAboutResponseDTO = await self._repository.search_abouts()
         return SearchAboutOutputDTOV1.model_validate(response)
 
     @async_postgres_sqlalchemy_atomic_decorator
@@ -130,15 +92,8 @@ class ContentLogic:
         return CreateExperienceOutputDTOV1.model_validate(obj=response)
 
     @async_postgres_sqlalchemy_atomic_decorator
-    async def get_experience(self, input_dto: GetExperienceInputDTOV1) -> GetExperienceOutputDTOV1:
-        query = GetExperienceQueryDTO.model_validate(obj=input_dto)
-        response: GetExperienceResponseDTO = await self._repository.get_experience(input_dto=query)
-        return GetExperienceOutputDTOV1.model_validate(obj=response)
-
-    @async_postgres_sqlalchemy_atomic_decorator
-    async def search_experiences(self, input_dto: SearchExperienceInputDTOV1) -> SearchExperienceOutputDTOV1:
-        repository_dto = SearchExperienceQueryDTO.model_validate(input_dto)
-        response: SearchExperienceResponseDTO = await self._repository.search_experiences(input_dto=repository_dto)
+    async def search_experiences(self) -> SearchExperienceOutputDTOV1:
+        response: SearchExperienceResponseDTO = await self._repository.search_experiences()
         return SearchExperienceOutputDTOV1.model_validate(response)
 
     @async_postgres_sqlalchemy_atomic_decorator
@@ -158,15 +113,8 @@ class ContentLogic:
         return CreateHonorOutputDTOV1.model_validate(obj=response)
 
     @async_postgres_sqlalchemy_atomic_decorator
-    async def get_honor(self, input_dto: GetHonorInputDTOV1) -> GetHonorOutputDTOV1:
-        query = GetHonorQueryDTO.model_validate(obj=input_dto)
-        response: GetHonorResponseDTO = await self._repository.get_honor(input_dto=query)
-        return GetHonorOutputDTOV1.model_validate(obj=response)
-
-    @async_postgres_sqlalchemy_atomic_decorator
-    async def search_honors(self, input_dto: SearchHonorInputDTOV1) -> SearchHonorOutputDTOV1:
-        repository_dto = SearchHonorQueryDTO.model_validate(input_dto)
-        response: SearchHonorResponseDTO = await self._repository.search_honors(input_dto=repository_dto)
+    async def search_honors(self) -> SearchHonorOutputDTOV1:
+        response: SearchHonorResponseDTO = await self._repository.search_honors()
         return SearchHonorOutputDTOV1.model_validate(response)
 
     @async_postgres_sqlalchemy_atomic_decorator
@@ -186,15 +134,8 @@ class ContentLogic:
         return CreateProjectOutputDTOV1.model_validate(obj=response)
 
     @async_postgres_sqlalchemy_atomic_decorator
-    async def get_project(self, input_dto: GetProjectInputDTOV1) -> GetProjectOutputDTOV1:
-        query = GetProjectQueryDTO.model_validate(obj=input_dto)
-        response: GetProjectResponseDTO = await self._repository.get_project(input_dto=query)
-        return GetProjectOutputDTOV1.model_validate(obj=response)
-
-    @async_postgres_sqlalchemy_atomic_decorator
-    async def search_projects(self, input_dto: SearchProjectInputDTOV1) -> SearchProjectOutputDTOV1:
-        repository_dto = SearchProjectQueryDTO.model_validate(input_dto)
-        response: SearchProjectResponseDTO = await self._repository.search_projects(input_dto=repository_dto)
+    async def search_projects(self) -> SearchProjectOutputDTOV1:
+        response: SearchProjectResponseDTO = await self._repository.search_projects()
         return SearchProjectOutputDTOV1.model_validate(response)
 
     @async_postgres_sqlalchemy_atomic_decorator
@@ -214,15 +155,8 @@ class ContentLogic:
         return CreateSkillOutputDTOV1.model_validate(obj=response)
 
     @async_postgres_sqlalchemy_atomic_decorator
-    async def get_skill(self, input_dto: GetSkillInputDTOV1) -> GetSkillOutputDTOV1:
-        query = GetSkillQueryDTO.model_validate(obj=input_dto)
-        response: GetSkillResponseDTO = await self._repository.get_skill(input_dto=query)
-        return GetSkillOutputDTOV1.model_validate(obj=response)
-
-    @async_postgres_sqlalchemy_atomic_decorator
-    async def search_skills(self, input_dto: SearchSkillInputDTOV1) -> SearchSkillOutputDTOV1:
-        repository_dto = SearchSkillQueryDTO.model_validate(input_dto)
-        response: SearchSkillResponseDTO = await self._repository.search_skills(input_dto=repository_dto)
+    async def search_skills(self) -> SearchSkillOutputDTOV1:
+        response: SearchSkillResponseDTO = await self._repository.search_skills()
         return SearchSkillOutputDTOV1.model_validate(response)
 
     @async_postgres_sqlalchemy_atomic_decorator

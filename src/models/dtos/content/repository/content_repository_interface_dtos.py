@@ -1,10 +1,7 @@
-from archipy.models.dtos.base_dtos import BaseDTO
-from archipy.models.dtos.pagination_dto import PaginationDTO
-from archipy.models.dtos.sort_dto import SortDTO
-from datetime import datetime, date, time
-from decimal import Decimal
-from pydantic import StrictStr
 from uuid import UUID
+
+from archipy.models.dtos.base_dtos import BaseDTO
+from pydantic import StrictStr
 
 from src.models.types.enums import *
 
@@ -15,10 +12,6 @@ class CreateAboutCommandDTO(BaseDTO):
 
 
 class CreateAboutResponseDTO(BaseDTO):
-    about_uuid: UUID
-
-
-class GetAboutQueryDTO(BaseDTO):
     about_uuid: UUID
 
 
@@ -38,12 +31,6 @@ class DeleteAboutCommandDTO(BaseDTO):
     about_uuid: UUID
 
 
-class SearchAboutQueryDTO(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]
-
-
 class SearchAboutResponseDTO(BaseDTO):
     abouts: list[GetAboutResponseDTO]
     total: int
@@ -58,10 +45,6 @@ class CreateExperienceCommandDTO(BaseDTO):
 
 
 class CreateExperienceResponseDTO(BaseDTO):
-    experience_uuid: UUID
-
-
-class GetExperienceQueryDTO(BaseDTO):
     experience_uuid: UUID
 
 
@@ -87,12 +70,6 @@ class DeleteExperienceCommandDTO(BaseDTO):
     experience_uuid: UUID
 
 
-class SearchExperienceQueryDTO(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]
-
-
 class SearchExperienceResponseDTO(BaseDTO):
     experiences: list[GetExperienceResponseDTO]
     total: int
@@ -106,10 +83,6 @@ class CreateHonorCommandDTO(BaseDTO):
 
 
 class CreateHonorResponseDTO(BaseDTO):
-    honor_uuid: UUID
-
-
-class GetHonorQueryDTO(BaseDTO):
     honor_uuid: UUID
 
 
@@ -133,12 +106,6 @@ class DeleteHonorCommandDTO(BaseDTO):
     honor_uuid: UUID
 
 
-class SearchHonorQueryDTO(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]
-
-
 class SearchHonorResponseDTO(BaseDTO):
     honors: list[GetHonorResponseDTO]
     total: int
@@ -156,10 +123,6 @@ class CreateProjectCommandDTO(BaseDTO):
 
 
 class CreateProjectResponseDTO(BaseDTO):
-    project_uuid: UUID
-
-
-class GetProjectQueryDTO(BaseDTO):
     project_uuid: UUID
 
 
@@ -191,19 +154,13 @@ class DeleteProjectCommandDTO(BaseDTO):
     project_uuid: UUID
 
 
-class SearchProjectQueryDTO(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]
-
-
 class SearchProjectResponseDTO(BaseDTO):
     projects: list[GetProjectResponseDTO]
     total: int
 
 
 class CreateSkillCommandDTO(BaseDTO):
-    group_name: StrictStr
+    group_name: SkillGroupNameType
     name: StrictStr
     display_order: int
 
@@ -212,32 +169,22 @@ class CreateSkillResponseDTO(BaseDTO):
     skill_uuid: UUID
 
 
-class GetSkillQueryDTO(BaseDTO):
-    skill_uuid: UUID
-
-
 class GetSkillResponseDTO(BaseDTO):
     skill_uuid: UUID
-    group_name: StrictStr
+    group_name: SkillGroupNameType
     name: StrictStr
     display_order: int
 
 
 class UpdateSkillCommandDTO(BaseDTO):
     skill_uuid: UUID
-    group_name: StrictStr | None = None
+    group_name: SkillGroupNameType | None = None
     name: StrictStr | None = None
     display_order: int | None = None
 
 
 class DeleteSkillCommandDTO(BaseDTO):
     skill_uuid: UUID
-
-
-class SearchSkillQueryDTO(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]
 
 
 class SearchSkillResponseDTO(BaseDTO):

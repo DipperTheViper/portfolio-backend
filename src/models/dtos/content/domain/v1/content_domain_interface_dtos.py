@@ -1,43 +1,18 @@
-from archipy.models.dtos.base_dtos import BaseDTO
-from archipy.models.dtos.pagination_dto import PaginationDTO
-from archipy.models.dtos.sort_dto import SortDTO
-from archipy.models.types.sort_order_type import SortOrderType
-from datetime import datetime, date, time
-from decimal import Decimal
-from pydantic import StrictStr
 from uuid import UUID
 
-from src.models.types.enums import *
+from archipy.models.dtos.base_dtos import BaseDTO
+from pydantic import StrictStr
+
+from src.models.types.enums import SkillGroupNameType
 
 
-class CreateAboutRestInputDTOV1(BaseDTO):
+class CreateAboutInputDTOV1(BaseDTO):
     lead: StrictStr
     body: StrictStr
-
-
-class CreateAboutInputDTOV1(CreateAboutRestInputDTOV1):
-    @classmethod
-    def create(
-        cls,
-        input_dto: CreateAboutRestInputDTOV1 = None,
-    ):
-        if input_dto:
-            return cls(**input_dto.model_dump(mode="json"))
-        return cls()
 
 
 class CreateAboutOutputDTOV1(BaseDTO):
     about_uuid: UUID
-
-
-class GetAboutInputDTOV1(BaseDTO):
-    about_uuid: UUID
-
-
-class GetAboutOutputDTOV1(BaseDTO):
-    about_uuid: UUID
-    lead: StrictStr
-    body: StrictStr
 
 
 class UpdateAboutRestInputDTOV1(BaseDTO):
@@ -53,24 +28,6 @@ class DeleteAboutInputDTOV1(BaseDTO):
     about_uuid: UUID
 
 
-class SearchAboutInputDTOV1(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]  # Replace with appropriate sort enum
-
-    @classmethod
-    def create(
-        cls,
-        page: int = 1,
-        page_size: int = 10,
-        sort_column: str = "created_at",
-        sort_order: SortOrderType = SortOrderType.DESCENDING,
-    ):
-        pagination = PaginationDTO(page=page, page_size=page_size)
-        sort_info = SortDTO[str](column=sort_column, order=sort_order)
-        return cls(pagination=pagination, sort_info=sort_info)
-
-
 class AboutItemDTOV1(BaseDTO):
     about_uuid: UUID
     lead: StrictStr
@@ -82,40 +39,16 @@ class SearchAboutOutputDTOV1(BaseDTO):
     total: int
 
 
-class CreateExperienceRestInputDTOV1(BaseDTO):
+class CreateExperienceInputDTOV1(BaseDTO):
     display_order: int
     date_range: StrictStr
     role: StrictStr
     company: StrictStr
     description: StrictStr
-
-
-class CreateExperienceInputDTOV1(CreateExperienceRestInputDTOV1):
-    @classmethod
-    def create(
-        cls,
-        input_dto: CreateExperienceRestInputDTOV1 = None,
-    ):
-        if input_dto:
-            return cls(**input_dto.model_dump(mode="json"))
-        return cls()
 
 
 class CreateExperienceOutputDTOV1(BaseDTO):
     experience_uuid: UUID
-
-
-class GetExperienceInputDTOV1(BaseDTO):
-    experience_uuid: UUID
-
-
-class GetExperienceOutputDTOV1(BaseDTO):
-    experience_uuid: UUID
-    display_order: int
-    date_range: StrictStr
-    role: StrictStr
-    company: StrictStr
-    description: StrictStr
 
 
 class UpdateExperienceRestInputDTOV1(BaseDTO):
@@ -134,24 +67,6 @@ class DeleteExperienceInputDTOV1(BaseDTO):
     experience_uuid: UUID
 
 
-class SearchExperienceInputDTOV1(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]  # Replace with appropriate sort enum
-
-    @classmethod
-    def create(
-        cls,
-        page: int = 1,
-        page_size: int = 10,
-        sort_column: str = "created_at",
-        sort_order: SortOrderType = SortOrderType.DESCENDING,
-    ):
-        pagination = PaginationDTO(page=page, page_size=page_size)
-        sort_info = SortDTO[str](column=sort_column, order=sort_order)
-        return cls(pagination=pagination, sort_info=sort_info)
-
-
 class ExperienceItemDTOV1(BaseDTO):
     experience_uuid: UUID
     display_order: int
@@ -166,38 +81,15 @@ class SearchExperienceOutputDTOV1(BaseDTO):
     total: int
 
 
-class CreateHonorRestInputDTOV1(BaseDTO):
+class CreateHonorInputDTOV1(BaseDTO):
     display_order: int
     figure: StrictStr
     title: StrictStr
     detail: StrictStr
-
-
-class CreateHonorInputDTOV1(CreateHonorRestInputDTOV1):
-    @classmethod
-    def create(
-        cls,
-        input_dto: CreateHonorRestInputDTOV1 = None,
-    ):
-        if input_dto:
-            return cls(**input_dto.model_dump(mode="json"))
-        return cls()
 
 
 class CreateHonorOutputDTOV1(BaseDTO):
     honor_uuid: UUID
-
-
-class GetHonorInputDTOV1(BaseDTO):
-    honor_uuid: UUID
-
-
-class GetHonorOutputDTOV1(BaseDTO):
-    honor_uuid: UUID
-    display_order: int
-    figure: StrictStr
-    title: StrictStr
-    detail: StrictStr
 
 
 class UpdateHonorRestInputDTOV1(BaseDTO):
@@ -215,24 +107,6 @@ class DeleteHonorInputDTOV1(BaseDTO):
     honor_uuid: UUID
 
 
-class SearchHonorInputDTOV1(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]  # Replace with appropriate sort enum
-
-    @classmethod
-    def create(
-        cls,
-        page: int = 1,
-        page_size: int = 10,
-        sort_column: str = "created_at",
-        sort_order: SortOrderType = SortOrderType.DESCENDING,
-    ):
-        pagination = PaginationDTO(page=page, page_size=page_size)
-        sort_info = SortDTO[str](column=sort_column, order=sort_order)
-        return cls(pagination=pagination, sort_info=sort_info)
-
-
 class HonorItemDTOV1(BaseDTO):
     honor_uuid: UUID
     display_order: int
@@ -246,7 +120,7 @@ class SearchHonorOutputDTOV1(BaseDTO):
     total: int
 
 
-class CreateProjectRestInputDTOV1(BaseDTO):
+class CreateProjectInputDTOV1(BaseDTO):
     display_order: int
     title: StrictStr
     date_range: StrictStr
@@ -255,37 +129,10 @@ class CreateProjectRestInputDTOV1(BaseDTO):
     description: StrictStr
     tech_tags: StrictStr
     stats: StrictStr
-
-
-class CreateProjectInputDTOV1(CreateProjectRestInputDTOV1):
-    @classmethod
-    def create(
-        cls,
-        input_dto: CreateProjectRestInputDTOV1 = None,
-    ):
-        if input_dto:
-            return cls(**input_dto.model_dump(mode="json"))
-        return cls()
 
 
 class CreateProjectOutputDTOV1(BaseDTO):
     project_uuid: UUID
-
-
-class GetProjectInputDTOV1(BaseDTO):
-    project_uuid: UUID
-
-
-class GetProjectOutputDTOV1(BaseDTO):
-    project_uuid: UUID
-    display_order: int
-    title: StrictStr
-    date_range: StrictStr
-    company: StrictStr
-    role: StrictStr
-    description: StrictStr
-    tech_tags: StrictStr
-    stats: StrictStr
 
 
 class UpdateProjectRestInputDTOV1(BaseDTO):
@@ -307,24 +154,6 @@ class DeleteProjectInputDTOV1(BaseDTO):
     project_uuid: UUID
 
 
-class SearchProjectInputDTOV1(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]  # Replace with appropriate sort enum
-
-    @classmethod
-    def create(
-        cls,
-        page: int = 1,
-        page_size: int = 10,
-        sort_column: str = "created_at",
-        sort_order: SortOrderType = SortOrderType.DESCENDING,
-    ):
-        pagination = PaginationDTO(page=page, page_size=page_size)
-        sort_info = SortDTO[str](column=sort_column, order=sort_order)
-        return cls(pagination=pagination, sort_info=sort_info)
-
-
 class ProjectItemDTOV1(BaseDTO):
     project_uuid: UUID
     display_order: int
@@ -342,40 +171,18 @@ class SearchProjectOutputDTOV1(BaseDTO):
     total: int
 
 
-class CreateSkillRestInputDTOV1(BaseDTO):
-    group_name: StrictStr
+class CreateSkillInputDTOV1(BaseDTO):
+    group_name: SkillGroupNameType
     name: StrictStr
     display_order: int
-
-
-class CreateSkillInputDTOV1(CreateSkillRestInputDTOV1):
-    @classmethod
-    def create(
-        cls,
-        input_dto: CreateSkillRestInputDTOV1 = None,
-    ):
-        if input_dto:
-            return cls(**input_dto.model_dump(mode="json"))
-        return cls()
 
 
 class CreateSkillOutputDTOV1(BaseDTO):
     skill_uuid: UUID
 
 
-class GetSkillInputDTOV1(BaseDTO):
-    skill_uuid: UUID
-
-
-class GetSkillOutputDTOV1(BaseDTO):
-    skill_uuid: UUID
-    group_name: StrictStr
-    name: StrictStr
-    display_order: int
-
-
 class UpdateSkillRestInputDTOV1(BaseDTO):
-    group_name: StrictStr | None = None
+    group_name: SkillGroupNameType | None = None
     name: StrictStr | None = None
     display_order: int | None = None
 
@@ -388,27 +195,9 @@ class DeleteSkillInputDTOV1(BaseDTO):
     skill_uuid: UUID
 
 
-class SearchSkillInputDTOV1(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]  # Replace with appropriate sort enum
-
-    @classmethod
-    def create(
-        cls,
-        page: int = 1,
-        page_size: int = 10,
-        sort_column: str = "created_at",
-        sort_order: SortOrderType = SortOrderType.DESCENDING,
-    ):
-        pagination = PaginationDTO(page=page, page_size=page_size)
-        sort_info = SortDTO[str](column=sort_column, order=sort_order)
-        return cls(pagination=pagination, sort_info=sort_info)
-
-
 class SkillItemDTOV1(BaseDTO):
     skill_uuid: UUID
-    group_name: StrictStr
+    group_name: SkillGroupNameType
     name: StrictStr
     display_order: int
 

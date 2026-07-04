@@ -16,7 +16,7 @@ class FilePurposeType(str, Enum):
     RESUME = "RESUME"
 
 
-class SkillGroupType(str, Enum):
+class SkillGroupNameType(str, Enum):
     LANGUAGES_FRAMEWORKS = "LANGUAGES_FRAMEWORKS"
     DATABASES_MESSAGING = "DATABASES_MESSAGING"
     TOOLS_PLATFORMS = "TOOLS_PLATFORMS"

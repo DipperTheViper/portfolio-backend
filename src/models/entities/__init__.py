@@ -11,7 +11,7 @@ from src.models.entities.file import FileEntity
 from src.models.types.enums import (
     FilePurposeType,
     FileType,
-    SkillGroupType,
+    SkillGroupNameType,
 )
 
 __all__ = [
@@ -25,5 +25,5 @@ __all__ = [
     "FileEntity",
     "FileType",
     "FilePurposeType",
-    "SkillGroupType",
+    "SkillGroupNameType",
 ]
