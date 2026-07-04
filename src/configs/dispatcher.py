@@ -58,4 +58,3 @@ def set_admin_dispatch_routes(app: FastAPI) -> None:
         dependencies=admin_dependencies,
         responses=common_private_response,
     )
-

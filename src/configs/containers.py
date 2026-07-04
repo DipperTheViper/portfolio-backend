@@ -25,7 +25,6 @@ class ServiceContainer(containers.DeclarativeContainer):
     _redis_adapter: AsyncRedisAdapter = providers.ThreadSafeSingleton(AsyncRedisAdapter)
     # endregion
 
-
     # region admin
     _admin_postgres_adapter = providers.ThreadSafeSingleton(
         AdminPostgresAdapter,

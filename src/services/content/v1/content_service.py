@@ -6,13 +6,61 @@ from uuid import UUID
 from src.configs.containers import ServiceContainer
 from src.logics.content.content_logic import ContentLogic
 from src.models.dtos.content.domain.v1.content_domain_interface_dtos import (
-    CreateAboutInputDTOV1, CreateAboutOutputDTOV1, CreateAboutRestInputDTOV1, CreateExperienceInputDTOV1, CreateExperienceOutputDTOV1, CreateExperienceRestInputDTOV1, CreateHonorInputDTOV1, CreateHonorOutputDTOV1, CreateHonorRestInputDTOV1, CreateProjectInputDTOV1, CreateProjectOutputDTOV1, CreateProjectRestInputDTOV1, CreateSkillInputDTOV1, CreateSkillOutputDTOV1, CreateSkillRestInputDTOV1, DeleteAboutInputDTOV1, DeleteExperienceInputDTOV1, DeleteHonorInputDTOV1, DeleteProjectInputDTOV1, DeleteSkillInputDTOV1, GetAboutInputDTOV1, GetAboutOutputDTOV1, GetExperienceInputDTOV1, GetExperienceOutputDTOV1, GetHonorInputDTOV1, GetHonorOutputDTOV1, GetProjectInputDTOV1, GetProjectOutputDTOV1, GetSkillInputDTOV1, GetSkillOutputDTOV1, SearchAboutInputDTOV1, SearchAboutOutputDTOV1, SearchExperienceInputDTOV1, SearchExperienceOutputDTOV1, SearchHonorInputDTOV1, SearchHonorOutputDTOV1, SearchProjectInputDTOV1, SearchProjectOutputDTOV1, SearchSkillInputDTOV1, SearchSkillOutputDTOV1, UpdateAboutInputDTOV1, UpdateAboutRestInputDTOV1, UpdateExperienceInputDTOV1, UpdateExperienceRestInputDTOV1, UpdateHonorInputDTOV1, UpdateHonorRestInputDTOV1, UpdateProjectInputDTOV1, UpdateProjectRestInputDTOV1, UpdateSkillInputDTOV1, UpdateSkillRestInputDTOV1
+    CreateAboutInputDTOV1,
+    CreateAboutOutputDTOV1,
+    CreateAboutRestInputDTOV1,
+    CreateExperienceInputDTOV1,
+    CreateExperienceOutputDTOV1,
+    CreateExperienceRestInputDTOV1,
+    CreateHonorInputDTOV1,
+    CreateHonorOutputDTOV1,
+    CreateHonorRestInputDTOV1,
+    CreateProjectInputDTOV1,
+    CreateProjectOutputDTOV1,
+    CreateProjectRestInputDTOV1,
+    CreateSkillInputDTOV1,
+    CreateSkillOutputDTOV1,
+    CreateSkillRestInputDTOV1,
+    DeleteAboutInputDTOV1,
+    DeleteExperienceInputDTOV1,
+    DeleteHonorInputDTOV1,
+    DeleteProjectInputDTOV1,
+    DeleteSkillInputDTOV1,
+    GetAboutInputDTOV1,
+    GetAboutOutputDTOV1,
+    GetExperienceInputDTOV1,
+    GetExperienceOutputDTOV1,
+    GetHonorInputDTOV1,
+    GetHonorOutputDTOV1,
+    GetProjectInputDTOV1,
+    GetProjectOutputDTOV1,
+    GetSkillInputDTOV1,
+    GetSkillOutputDTOV1,
+    SearchAboutInputDTOV1,
+    SearchAboutOutputDTOV1,
+    SearchExperienceInputDTOV1,
+    SearchExperienceOutputDTOV1,
+    SearchHonorInputDTOV1,
+    SearchHonorOutputDTOV1,
+    SearchProjectInputDTOV1,
+    SearchProjectOutputDTOV1,
+    SearchSkillInputDTOV1,
+    SearchSkillOutputDTOV1,
+    UpdateAboutInputDTOV1,
+    UpdateAboutRestInputDTOV1,
+    UpdateExperienceInputDTOV1,
+    UpdateExperienceRestInputDTOV1,
+    UpdateHonorInputDTOV1,
+    UpdateHonorRestInputDTOV1,
+    UpdateProjectInputDTOV1,
+    UpdateProjectRestInputDTOV1,
+    UpdateSkillInputDTOV1,
+    UpdateSkillRestInputDTOV1,
 )
 from src.models.types.api_router_type import ApiRouterType
 from src.utils.utils import Utils
 
 routerV1: APIRouter = APIRouter(tags=[ApiRouterType.CONTENT])
-
 
 
 @routerV1.post(
@@ -89,7 +137,6 @@ async def delete_about(
     await logic.delete_about(input_dto=input_dto)
 
 
-
 @routerV1.post(
     path="/{user_uuid}/experiences",
     response_model=CreateExperienceOutputDTOV1,
@@ -162,7 +209,6 @@ async def delete_experience(
 ) -> None:
     input_dto = DeleteExperienceInputDTOV1(experience_uuid=experience_uuid)
     await logic.delete_experience(input_dto=input_dto)
-
 
 
 @routerV1.post(
@@ -239,7 +285,6 @@ async def delete_honor(
     await logic.delete_honor(input_dto=input_dto)
 
 
-
 @routerV1.post(
     path="/{user_uuid}/projects",
     response_model=CreateProjectOutputDTOV1,
@@ -314,7 +359,6 @@ async def delete_project(
     await logic.delete_project(input_dto=input_dto)
 
 
-
 @routerV1.post(
     path="/{user_uuid}/skills",
     response_model=CreateSkillOutputDTOV1,
@@ -387,4 +431,3 @@ async def delete_skill(
 ) -> None:
     input_dto = DeleteSkillInputDTOV1(skill_uuid=skill_uuid)
     await logic.delete_skill(input_dto=input_dto)
-

@@ -2,10 +2,24 @@ from archipy.helpers.decorators.sqlalchemy_atomic import async_postgres_sqlalche
 from uuid import UUID
 
 from src.models.dtos.file.domain.v1.file_domain_interface_dtos import (
-    CreateFileInputDTOV1, CreateFileOutputDTOV1, GetFileInputDTOV1, GetFileOutputDTOV1, UpdateFileInputDTOV1, DeleteFileInputDTOV1, SearchFileInputDTOV1, SearchFileOutputDTOV1
+    CreateFileInputDTOV1,
+    CreateFileOutputDTOV1,
+    GetFileInputDTOV1,
+    GetFileOutputDTOV1,
+    UpdateFileInputDTOV1,
+    DeleteFileInputDTOV1,
+    SearchFileInputDTOV1,
+    SearchFileOutputDTOV1,
 )
 from src.models.dtos.file.repository.file_repository_interface_dtos import (
-    CreateFileCommandDTO, CreateFileResponseDTO, GetFileQueryDTO, GetFileResponseDTO, UpdateFileCommandDTO, DeleteFileCommandDTO, SearchFileQueryDTO, SearchFileResponseDTO
+    CreateFileCommandDTO,
+    CreateFileResponseDTO,
+    GetFileQueryDTO,
+    GetFileResponseDTO,
+    UpdateFileCommandDTO,
+    DeleteFileCommandDTO,
+    SearchFileQueryDTO,
+    SearchFileResponseDTO,
 )
 from src.repositories.file.file_repository import FileRepository
 
@@ -44,4 +58,3 @@ class FileLogic:
     async def delete_file(self, input_dto: DeleteFileInputDTOV1) -> None:
         command = DeleteFileCommandDTO.model_validate(obj=input_dto)
         await self._repository.delete_file(input_dto=command)
-

@@ -91,4 +91,3 @@ class AdminItemDTOV1(BaseDTO):
 class SearchAdminOutputDTOV1(BaseDTO):
     admins: list[AdminItemDTOV1]
     total: int
-

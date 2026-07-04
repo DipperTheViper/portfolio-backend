@@ -6,13 +6,21 @@ from uuid import UUID
 from src.configs.containers import ServiceContainer
 from src.logics.contact.contact_logic import ContactLogic
 from src.models.dtos.contact.domain.v1.contact_domain_interface_dtos import (
-    CreateContactMessageInputDTOV1, CreateContactMessageOutputDTOV1, CreateContactMessageRestInputDTOV1, DeleteContactMessageInputDTOV1, GetContactMessageInputDTOV1, GetContactMessageOutputDTOV1, SearchContactMessageInputDTOV1, SearchContactMessageOutputDTOV1, UpdateContactMessageInputDTOV1, UpdateContactMessageRestInputDTOV1
+    CreateContactMessageInputDTOV1,
+    CreateContactMessageOutputDTOV1,
+    CreateContactMessageRestInputDTOV1,
+    DeleteContactMessageInputDTOV1,
+    GetContactMessageInputDTOV1,
+    GetContactMessageOutputDTOV1,
+    SearchContactMessageInputDTOV1,
+    SearchContactMessageOutputDTOV1,
+    UpdateContactMessageInputDTOV1,
+    UpdateContactMessageRestInputDTOV1,
 )
 from src.models.types.api_router_type import ApiRouterType
 from src.utils.utils import Utils
 
 routerV1: APIRouter = APIRouter(tags=[ApiRouterType.CONTACT])
-
 
 
 @routerV1.post(
@@ -87,4 +95,3 @@ async def delete_contact_message(
 ) -> None:
     input_dto = DeleteContactMessageInputDTOV1(contact_message_uuid=contact_message_uuid)
     await logic.delete_contact_message(input_dto=input_dto)
-

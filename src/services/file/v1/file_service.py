@@ -6,13 +6,21 @@ from uuid import UUID
 from src.configs.containers import ServiceContainer
 from src.logics.file.file_logic import FileLogic
 from src.models.dtos.file.domain.v1.file_domain_interface_dtos import (
-    CreateFileInputDTOV1, CreateFileOutputDTOV1, CreateFileRestInputDTOV1, DeleteFileInputDTOV1, GetFileInputDTOV1, GetFileOutputDTOV1, SearchFileInputDTOV1, SearchFileOutputDTOV1, UpdateFileInputDTOV1, UpdateFileRestInputDTOV1
+    CreateFileInputDTOV1,
+    CreateFileOutputDTOV1,
+    CreateFileRestInputDTOV1,
+    DeleteFileInputDTOV1,
+    GetFileInputDTOV1,
+    GetFileOutputDTOV1,
+    SearchFileInputDTOV1,
+    SearchFileOutputDTOV1,
+    UpdateFileInputDTOV1,
+    UpdateFileRestInputDTOV1,
 )
 from src.models.types.api_router_type import ApiRouterType
 from src.utils.utils import Utils
 
 routerV1: APIRouter = APIRouter(tags=[ApiRouterType.FILE])
-
 
 
 @routerV1.post(
@@ -87,4 +95,3 @@ async def delete_file(
 ) -> None:
     input_dto = DeleteFileInputDTOV1(file_uuid=file_uuid)
     await logic.delete_file(input_dto=input_dto)
-

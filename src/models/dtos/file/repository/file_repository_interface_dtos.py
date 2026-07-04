@@ -59,4 +59,3 @@ class SearchFileQueryDTO(BaseDTO):
 class SearchFileResponseDTO(BaseDTO):
     files: list[GetFileResponseDTO]
     total: int
-

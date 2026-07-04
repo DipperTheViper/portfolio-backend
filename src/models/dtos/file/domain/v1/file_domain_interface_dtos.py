@@ -99,4 +99,3 @@ class FileItemDTOV1(BaseDTO):
 class SearchFileOutputDTOV1(BaseDTO):
     files: list[FileItemDTOV1]
     total: int
-

@@ -91,4 +91,3 @@ class ContactMessageItemDTOV1(BaseDTO):
 class SearchContactMessageOutputDTOV1(BaseDTO):
     contact_messages: list[ContactMessageItemDTOV1]
     total: int
-

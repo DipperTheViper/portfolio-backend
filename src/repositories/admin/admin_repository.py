@@ -1,5 +1,13 @@
 from src.models.dtos.admin.repository.admin_repository_interface_dtos import (
-    CreateAdminCommandDTO, CreateAdminResponseDTO, GetAdminQueryDTO, GetAdminByUsernameQueryDTO, GetAdminResponseDTO, UpdateAdminCommandDTO, DeleteAdminCommandDTO, SearchAdminQueryDTO, SearchAdminResponseDTO
+    CreateAdminCommandDTO,
+    CreateAdminResponseDTO,
+    GetAdminQueryDTO,
+    GetAdminByUsernameQueryDTO,
+    GetAdminResponseDTO,
+    UpdateAdminCommandDTO,
+    DeleteAdminCommandDTO,
+    SearchAdminQueryDTO,
+    SearchAdminResponseDTO,
 )
 from src.repositories.admin.adapters.admin_postgres_adapter import AdminPostgresAdapter
 
@@ -25,4 +33,3 @@ class AdminRepository:
 
     async def delete_admin(self, input_dto: DeleteAdminCommandDTO) -> None:
         await self._postgres_adapter.delete_admin(input_dto=input_dto)
-

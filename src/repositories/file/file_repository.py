@@ -1,5 +1,12 @@
 from src.models.dtos.file.repository.file_repository_interface_dtos import (
-    CreateFileCommandDTO, CreateFileResponseDTO, GetFileQueryDTO, GetFileResponseDTO, UpdateFileCommandDTO, DeleteFileCommandDTO, SearchFileQueryDTO, SearchFileResponseDTO
+    CreateFileCommandDTO,
+    CreateFileResponseDTO,
+    GetFileQueryDTO,
+    GetFileResponseDTO,
+    UpdateFileCommandDTO,
+    DeleteFileCommandDTO,
+    SearchFileQueryDTO,
+    SearchFileResponseDTO,
 )
 from src.repositories.file.adapters.file_postgres_adapter import FilePostgresAdapter
 
@@ -22,4 +29,3 @@ class FileRepository:
 
     async def delete_file(self, input_dto: DeleteFileCommandDTO) -> None:
         await self._postgres_adapter.delete_file(input_dto=input_dto)
-

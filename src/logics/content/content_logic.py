@@ -2,10 +2,88 @@ from archipy.helpers.decorators.sqlalchemy_atomic import async_postgres_sqlalche
 from uuid import UUID
 
 from src.models.dtos.content.domain.v1.content_domain_interface_dtos import (
-    CreateAboutInputDTOV1, CreateAboutOutputDTOV1, GetAboutInputDTOV1, GetAboutOutputDTOV1, UpdateAboutInputDTOV1, DeleteAboutInputDTOV1, SearchAboutInputDTOV1, SearchAboutOutputDTOV1, CreateExperienceInputDTOV1, CreateExperienceOutputDTOV1, GetExperienceInputDTOV1, GetExperienceOutputDTOV1, UpdateExperienceInputDTOV1, DeleteExperienceInputDTOV1, SearchExperienceInputDTOV1, SearchExperienceOutputDTOV1, CreateHonorInputDTOV1, CreateHonorOutputDTOV1, GetHonorInputDTOV1, GetHonorOutputDTOV1, UpdateHonorInputDTOV1, DeleteHonorInputDTOV1, SearchHonorInputDTOV1, SearchHonorOutputDTOV1, CreateProjectInputDTOV1, CreateProjectOutputDTOV1, GetProjectInputDTOV1, GetProjectOutputDTOV1, UpdateProjectInputDTOV1, DeleteProjectInputDTOV1, SearchProjectInputDTOV1, SearchProjectOutputDTOV1, CreateSkillInputDTOV1, CreateSkillOutputDTOV1, GetSkillInputDTOV1, GetSkillOutputDTOV1, UpdateSkillInputDTOV1, DeleteSkillInputDTOV1, SearchSkillInputDTOV1, SearchSkillOutputDTOV1
+    CreateAboutInputDTOV1,
+    CreateAboutOutputDTOV1,
+    GetAboutInputDTOV1,
+    GetAboutOutputDTOV1,
+    UpdateAboutInputDTOV1,
+    DeleteAboutInputDTOV1,
+    SearchAboutInputDTOV1,
+    SearchAboutOutputDTOV1,
+    CreateExperienceInputDTOV1,
+    CreateExperienceOutputDTOV1,
+    GetExperienceInputDTOV1,
+    GetExperienceOutputDTOV1,
+    UpdateExperienceInputDTOV1,
+    DeleteExperienceInputDTOV1,
+    SearchExperienceInputDTOV1,
+    SearchExperienceOutputDTOV1,
+    CreateHonorInputDTOV1,
+    CreateHonorOutputDTOV1,
+    GetHonorInputDTOV1,
+    GetHonorOutputDTOV1,
+    UpdateHonorInputDTOV1,
+    DeleteHonorInputDTOV1,
+    SearchHonorInputDTOV1,
+    SearchHonorOutputDTOV1,
+    CreateProjectInputDTOV1,
+    CreateProjectOutputDTOV1,
+    GetProjectInputDTOV1,
+    GetProjectOutputDTOV1,
+    UpdateProjectInputDTOV1,
+    DeleteProjectInputDTOV1,
+    SearchProjectInputDTOV1,
+    SearchProjectOutputDTOV1,
+    CreateSkillInputDTOV1,
+    CreateSkillOutputDTOV1,
+    GetSkillInputDTOV1,
+    GetSkillOutputDTOV1,
+    UpdateSkillInputDTOV1,
+    DeleteSkillInputDTOV1,
+    SearchSkillInputDTOV1,
+    SearchSkillOutputDTOV1,
 )
 from src.models.dtos.content.repository.content_repository_interface_dtos import (
-    CreateAboutCommandDTO, CreateAboutResponseDTO, GetAboutQueryDTO, GetAboutResponseDTO, UpdateAboutCommandDTO, DeleteAboutCommandDTO, SearchAboutQueryDTO, SearchAboutResponseDTO, CreateExperienceCommandDTO, CreateExperienceResponseDTO, GetExperienceQueryDTO, GetExperienceResponseDTO, UpdateExperienceCommandDTO, DeleteExperienceCommandDTO, SearchExperienceQueryDTO, SearchExperienceResponseDTO, CreateHonorCommandDTO, CreateHonorResponseDTO, GetHonorQueryDTO, GetHonorResponseDTO, UpdateHonorCommandDTO, DeleteHonorCommandDTO, SearchHonorQueryDTO, SearchHonorResponseDTO, CreateProjectCommandDTO, CreateProjectResponseDTO, GetProjectQueryDTO, GetProjectResponseDTO, UpdateProjectCommandDTO, DeleteProjectCommandDTO, SearchProjectQueryDTO, SearchProjectResponseDTO, CreateSkillCommandDTO, CreateSkillResponseDTO, GetSkillQueryDTO, GetSkillResponseDTO, UpdateSkillCommandDTO, DeleteSkillCommandDTO, SearchSkillQueryDTO, SearchSkillResponseDTO
+    CreateAboutCommandDTO,
+    CreateAboutResponseDTO,
+    GetAboutQueryDTO,
+    GetAboutResponseDTO,
+    UpdateAboutCommandDTO,
+    DeleteAboutCommandDTO,
+    SearchAboutQueryDTO,
+    SearchAboutResponseDTO,
+    CreateExperienceCommandDTO,
+    CreateExperienceResponseDTO,
+    GetExperienceQueryDTO,
+    GetExperienceResponseDTO,
+    UpdateExperienceCommandDTO,
+    DeleteExperienceCommandDTO,
+    SearchExperienceQueryDTO,
+    SearchExperienceResponseDTO,
+    CreateHonorCommandDTO,
+    CreateHonorResponseDTO,
+    GetHonorQueryDTO,
+    GetHonorResponseDTO,
+    UpdateHonorCommandDTO,
+    DeleteHonorCommandDTO,
+    SearchHonorQueryDTO,
+    SearchHonorResponseDTO,
+    CreateProjectCommandDTO,
+    CreateProjectResponseDTO,
+    GetProjectQueryDTO,
+    GetProjectResponseDTO,
+    UpdateProjectCommandDTO,
+    DeleteProjectCommandDTO,
+    SearchProjectQueryDTO,
+    SearchProjectResponseDTO,
+    CreateSkillCommandDTO,
+    CreateSkillResponseDTO,
+    GetSkillQueryDTO,
+    GetSkillResponseDTO,
+    UpdateSkillCommandDTO,
+    DeleteSkillCommandDTO,
+    SearchSkillQueryDTO,
+    SearchSkillResponseDTO,
 )
 from src.repositories.content.content_repository import ContentRepository
 
@@ -45,7 +123,6 @@ class ContentLogic:
         command = DeleteAboutCommandDTO.model_validate(obj=input_dto)
         await self._repository.delete_about(input_dto=command)
 
-
     @async_postgres_sqlalchemy_atomic_decorator
     async def create_experience(self, input_dto: CreateExperienceInputDTOV1) -> CreateExperienceOutputDTOV1:
         command = CreateExperienceCommandDTO.model_validate(input_dto)
@@ -73,7 +150,6 @@ class ContentLogic:
     async def delete_experience(self, input_dto: DeleteExperienceInputDTOV1) -> None:
         command = DeleteExperienceCommandDTO.model_validate(obj=input_dto)
         await self._repository.delete_experience(input_dto=command)
-
 
     @async_postgres_sqlalchemy_atomic_decorator
     async def create_honor(self, input_dto: CreateHonorInputDTOV1) -> CreateHonorOutputDTOV1:
@@ -103,7 +179,6 @@ class ContentLogic:
         command = DeleteHonorCommandDTO.model_validate(obj=input_dto)
         await self._repository.delete_honor(input_dto=command)
 
-
     @async_postgres_sqlalchemy_atomic_decorator
     async def create_project(self, input_dto: CreateProjectInputDTOV1) -> CreateProjectOutputDTOV1:
         command = CreateProjectCommandDTO.model_validate(input_dto)
@@ -132,7 +207,6 @@ class ContentLogic:
         command = DeleteProjectCommandDTO.model_validate(obj=input_dto)
         await self._repository.delete_project(input_dto=command)
 
-
     @async_postgres_sqlalchemy_atomic_decorator
     async def create_skill(self, input_dto: CreateSkillInputDTOV1) -> CreateSkillOutputDTOV1:
         command = CreateSkillCommandDTO.model_validate(input_dto)
@@ -160,4 +234,3 @@ class ContentLogic:
     async def delete_skill(self, input_dto: DeleteSkillInputDTOV1) -> None:
         command = DeleteSkillCommandDTO.model_validate(obj=input_dto)
         await self._repository.delete_skill(input_dto=command)
-

@@ -1,5 +1,44 @@
 from src.models.dtos.content.repository.content_repository_interface_dtos import (
-    CreateAboutCommandDTO, CreateAboutResponseDTO, GetAboutQueryDTO, GetAboutResponseDTO, UpdateAboutCommandDTO, DeleteAboutCommandDTO, SearchAboutQueryDTO, SearchAboutResponseDTO, CreateExperienceCommandDTO, CreateExperienceResponseDTO, GetExperienceQueryDTO, GetExperienceResponseDTO, UpdateExperienceCommandDTO, DeleteExperienceCommandDTO, SearchExperienceQueryDTO, SearchExperienceResponseDTO, CreateHonorCommandDTO, CreateHonorResponseDTO, GetHonorQueryDTO, GetHonorResponseDTO, UpdateHonorCommandDTO, DeleteHonorCommandDTO, SearchHonorQueryDTO, SearchHonorResponseDTO, CreateProjectCommandDTO, CreateProjectResponseDTO, GetProjectQueryDTO, GetProjectResponseDTO, UpdateProjectCommandDTO, DeleteProjectCommandDTO, SearchProjectQueryDTO, SearchProjectResponseDTO, CreateSkillCommandDTO, CreateSkillResponseDTO, GetSkillQueryDTO, GetSkillResponseDTO, UpdateSkillCommandDTO, DeleteSkillCommandDTO, SearchSkillQueryDTO, SearchSkillResponseDTO
+    CreateAboutCommandDTO,
+    CreateAboutResponseDTO,
+    GetAboutQueryDTO,
+    GetAboutResponseDTO,
+    UpdateAboutCommandDTO,
+    DeleteAboutCommandDTO,
+    SearchAboutQueryDTO,
+    SearchAboutResponseDTO,
+    CreateExperienceCommandDTO,
+    CreateExperienceResponseDTO,
+    GetExperienceQueryDTO,
+    GetExperienceResponseDTO,
+    UpdateExperienceCommandDTO,
+    DeleteExperienceCommandDTO,
+    SearchExperienceQueryDTO,
+    SearchExperienceResponseDTO,
+    CreateHonorCommandDTO,
+    CreateHonorResponseDTO,
+    GetHonorQueryDTO,
+    GetHonorResponseDTO,
+    UpdateHonorCommandDTO,
+    DeleteHonorCommandDTO,
+    SearchHonorQueryDTO,
+    SearchHonorResponseDTO,
+    CreateProjectCommandDTO,
+    CreateProjectResponseDTO,
+    GetProjectQueryDTO,
+    GetProjectResponseDTO,
+    UpdateProjectCommandDTO,
+    DeleteProjectCommandDTO,
+    SearchProjectQueryDTO,
+    SearchProjectResponseDTO,
+    CreateSkillCommandDTO,
+    CreateSkillResponseDTO,
+    GetSkillQueryDTO,
+    GetSkillResponseDTO,
+    UpdateSkillCommandDTO,
+    DeleteSkillCommandDTO,
+    SearchSkillQueryDTO,
+    SearchSkillResponseDTO,
 )
 from src.repositories.content.adapters.content_postgres_adapter import ContentPostgresAdapter
 
@@ -23,7 +62,6 @@ class ContentRepository:
     async def delete_about(self, input_dto: DeleteAboutCommandDTO) -> None:
         await self._postgres_adapter.delete_about(input_dto=input_dto)
 
-
     async def create_experience(self, input_dto: CreateExperienceCommandDTO) -> CreateExperienceResponseDTO:
         return await self._postgres_adapter.create_experience(input_dto=input_dto)
 
@@ -38,7 +76,6 @@ class ContentRepository:
 
     async def delete_experience(self, input_dto: DeleteExperienceCommandDTO) -> None:
         await self._postgres_adapter.delete_experience(input_dto=input_dto)
-
 
     async def create_honor(self, input_dto: CreateHonorCommandDTO) -> CreateHonorResponseDTO:
         return await self._postgres_adapter.create_honor(input_dto=input_dto)
@@ -55,7 +92,6 @@ class ContentRepository:
     async def delete_honor(self, input_dto: DeleteHonorCommandDTO) -> None:
         await self._postgres_adapter.delete_honor(input_dto=input_dto)
 
-
     async def create_project(self, input_dto: CreateProjectCommandDTO) -> CreateProjectResponseDTO:
         return await self._postgres_adapter.create_project(input_dto=input_dto)
 
@@ -71,7 +107,6 @@ class ContentRepository:
     async def delete_project(self, input_dto: DeleteProjectCommandDTO) -> None:
         await self._postgres_adapter.delete_project(input_dto=input_dto)
 
-
     async def create_skill(self, input_dto: CreateSkillCommandDTO) -> CreateSkillResponseDTO:
         return await self._postgres_adapter.create_skill(input_dto=input_dto)
 
@@ -86,4 +121,3 @@ class ContentRepository:
 
     async def delete_skill(self, input_dto: DeleteSkillCommandDTO) -> None:
         await self._postgres_adapter.delete_skill(input_dto=input_dto)
-

@@ -243,4 +243,3 @@ class SearchSkillQueryDTO(BaseDTO):
 class SearchSkillResponseDTO(BaseDTO):
     skills: list[GetSkillResponseDTO]
     total: int
-

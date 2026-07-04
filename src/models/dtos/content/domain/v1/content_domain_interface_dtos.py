@@ -431,4 +431,3 @@ class SkillItemDTOV1(BaseDTO):
 class SearchSkillOutputDTOV1(BaseDTO):
     skills: list[SkillItemDTOV1]
     total: int
-

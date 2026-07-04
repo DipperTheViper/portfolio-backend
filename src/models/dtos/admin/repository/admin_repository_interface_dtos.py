@@ -54,4 +54,3 @@ class SearchAdminQueryDTO(BaseDTO):
 class SearchAdminResponseDTO(BaseDTO):
     admins: list[GetAdminResponseDTO]
     total: int
-

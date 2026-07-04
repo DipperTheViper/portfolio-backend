@@ -7,7 +7,14 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.sql.expression import Select, Update
 
 from src.models.dtos.file.repository.file_repository_interface_dtos import (
-    CreateFileCommandDTO, CreateFileResponseDTO, GetFileQueryDTO, GetFileResponseDTO, UpdateFileCommandDTO, DeleteFileCommandDTO, SearchFileQueryDTO, SearchFileResponseDTO
+    CreateFileCommandDTO,
+    CreateFileResponseDTO,
+    GetFileQueryDTO,
+    GetFileResponseDTO,
+    UpdateFileCommandDTO,
+    DeleteFileCommandDTO,
+    SearchFileQueryDTO,
+    SearchFileResponseDTO,
 )
 from src.models.entities import FileEntity
 
@@ -88,4 +95,3 @@ class FilePostgresAdapter(SQLAlchemyFilterMixin):
         result = await self._adapter.execute(statement=delete_query)
         if result.rowcount == 0:
             raise NotFoundError(resource_type=FileEntity.__name__)
-

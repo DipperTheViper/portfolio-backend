@@ -6,13 +6,21 @@ from uuid import UUID
 from src.configs.containers import ServiceContainer
 from src.logics.admin.admin_logic import AdminLogic
 from src.models.dtos.admin.domain.v1.admin_domain_interface_dtos import (
-    CreateAdminInputDTOV1, CreateAdminOutputDTOV1, CreateAdminRestInputDTOV1, DeleteAdminInputDTOV1, GetAdminInputDTOV1, GetAdminOutputDTOV1, SearchAdminInputDTOV1, SearchAdminOutputDTOV1, UpdateAdminInputDTOV1, UpdateAdminRestInputDTOV1
+    CreateAdminInputDTOV1,
+    CreateAdminOutputDTOV1,
+    CreateAdminRestInputDTOV1,
+    DeleteAdminInputDTOV1,
+    GetAdminInputDTOV1,
+    GetAdminOutputDTOV1,
+    SearchAdminInputDTOV1,
+    SearchAdminOutputDTOV1,
+    UpdateAdminInputDTOV1,
+    UpdateAdminRestInputDTOV1,
 )
 from src.models.types.api_router_type import ApiRouterType
 from src.utils.utils import Utils
 
 routerV1: APIRouter = APIRouter(tags=[ApiRouterType.ADMIN])
-
 
 
 @routerV1.post(
@@ -87,4 +95,3 @@ async def delete_admin(
 ) -> None:
     input_dto = DeleteAdminInputDTOV1(admin_uuid=admin_uuid)
     await logic.delete_admin(input_dto=input_dto)
-

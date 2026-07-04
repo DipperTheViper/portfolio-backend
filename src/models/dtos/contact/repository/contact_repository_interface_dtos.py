@@ -53,4 +53,3 @@ class SearchContactMessageQueryDTO(BaseDTO):
 class SearchContactMessageResponseDTO(BaseDTO):
     contact_messages: list[GetContactMessageResponseDTO]
     total: int
-

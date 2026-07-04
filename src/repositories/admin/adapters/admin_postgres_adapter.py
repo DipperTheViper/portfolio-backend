@@ -7,7 +7,15 @@ from sqlalchemy.orm import selectinload
 from sqlalchemy.sql.expression import Select, Update
 
 from src.models.dtos.admin.repository.admin_repository_interface_dtos import (
-    CreateAdminCommandDTO, CreateAdminResponseDTO, GetAdminQueryDTO, GetAdminByUsernameQueryDTO, GetAdminResponseDTO, UpdateAdminCommandDTO, DeleteAdminCommandDTO, SearchAdminQueryDTO, SearchAdminResponseDTO
+    CreateAdminCommandDTO,
+    CreateAdminResponseDTO,
+    GetAdminQueryDTO,
+    GetAdminByUsernameQueryDTO,
+    GetAdminResponseDTO,
+    UpdateAdminCommandDTO,
+    DeleteAdminCommandDTO,
+    SearchAdminQueryDTO,
+    SearchAdminResponseDTO,
 )
 from src.models.entities import AdminEntity
 
@@ -104,4 +112,3 @@ class AdminPostgresAdapter(SQLAlchemyFilterMixin):
         result = await self._adapter.execute(statement=delete_query)
         if result.rowcount == 0:
             raise NotFoundError(resource_type=AdminEntity.__name__)
-
