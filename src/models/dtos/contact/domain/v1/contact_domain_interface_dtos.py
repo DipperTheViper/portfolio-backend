@@ -8,7 +8,6 @@ class CreateContactMessageInputDTOV1(BaseDTO):
     name: StrictStr
     email: StrictStr
     message: StrictStr
-    is_read: bool = False
 
 
 class CreateContactMessageOutputDTOV1(BaseDTO):

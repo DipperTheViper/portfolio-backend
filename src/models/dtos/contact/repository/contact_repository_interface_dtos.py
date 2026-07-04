@@ -8,7 +8,7 @@ class CreateContactMessageCommandDTO(BaseDTO):
     name: StrictStr
     email: StrictStr
     message: StrictStr
-    is_read: bool
+    is_read: bool = False
 
 
 class CreateContactMessageResponseDTO(BaseDTO):
