@@ -1,33 +1,15 @@
-from archipy.models.dtos.base_dtos import BaseDTO
-from archipy.models.dtos.pagination_dto import PaginationDTO
-from archipy.models.dtos.sort_dto import SortDTO
-from archipy.models.types.sort_order_type import SortOrderType
-from datetime import datetime, date, time
-from decimal import Decimal
-from pydantic import StrictStr
 from uuid import UUID
 
-from src.models.types.enums import *
+from archipy.models.dtos.base_dtos import BaseDTO
+from pydantic import StrictStr
+
+from src.models.types.enums import FilePurposeType
 
 
-class CreateFileRestInputDTOV1(BaseDTO):
+class CreateFileInputDTOV1(BaseDTO):
     file_name: StrictStr
-    path: StrictStr
-    file_type: StrictStr
-    purpose_type: StrictStr
-    created_by: UUID | None = None
-    updated_by: UUID | None = None
-
-
-class CreateFileInputDTOV1(CreateFileRestInputDTOV1):
-    @classmethod
-    def create(
-        cls,
-        input_dto: CreateFileRestInputDTOV1 = None,
-    ):
-        if input_dto:
-            return cls(**input_dto.model_dump(mode="json"))
-        return cls()
+    content: bytes
+    purpose_type: FilePurposeType
 
 
 class CreateFileOutputDTOV1(BaseDTO):
@@ -38,59 +20,21 @@ class GetFileInputDTOV1(BaseDTO):
     file_uuid: UUID
 
 
-class GetFileOutputDTOV1(BaseDTO):
+class UpdateFileInputDTOV1(BaseDTO):
     file_uuid: UUID
     file_name: StrictStr
-    path: StrictStr
-    file_type: StrictStr
-    purpose_type: StrictStr
-    created_by: UUID | None = None
-    updated_by: UUID | None = None
-
-
-class UpdateFileRestInputDTOV1(BaseDTO):
-    file_name: StrictStr | None = None
-    path: StrictStr | None = None
-    file_type: StrictStr | None = None
-    purpose_type: StrictStr | None = None
-    created_by: UUID | None = None
-    updated_by: UUID | None = None
-
-
-class UpdateFileInputDTOV1(UpdateFileRestInputDTOV1):
-    file_uuid: UUID
+    content: bytes
 
 
 class DeleteFileInputDTOV1(BaseDTO):
     file_uuid: UUID
 
 
-class SearchFileInputDTOV1(BaseDTO):
-    # TODO: Add search fields as needed
-    pagination: PaginationDTO
-    sort_info: SortDTO[str]  # Replace with appropriate sort enum
-
-    @classmethod
-    def create(
-        cls,
-        page: int = 1,
-        page_size: int = 10,
-        sort_column: str = "created_at",
-        sort_order: SortOrderType = SortOrderType.DESCENDING,
-    ):
-        pagination = PaginationDTO(page=page, page_size=page_size)
-        sort_info = SortDTO[str](column=sort_column, order=sort_order)
-        return cls(pagination=pagination, sort_info=sort_info)
-
-
 class FileItemDTOV1(BaseDTO):
     file_uuid: UUID
     file_name: StrictStr
-    path: StrictStr
     file_type: StrictStr
     purpose_type: StrictStr
-    created_by: UUID | None = None
-    updated_by: UUID | None = None
 
 
 class SearchFileOutputDTOV1(BaseDTO):

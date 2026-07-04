@@ -2,8 +2,7 @@ from archipy.adapters.base.sqlalchemy.adapters import SQLAlchemyFilterMixin
 from archipy.adapters.postgres.sqlalchemy.adapters import AsyncPostgresSQLAlchemyAdapter
 from archipy.models.errors import NotFoundError
 from archipy.models.types.base_types import FilterOperationType
-from sqlalchemy import delete, select, update, func, or_
-from sqlalchemy.orm import selectinload
+from sqlalchemy import select, update
 from sqlalchemy.sql.expression import Select, Update
 
 from src.models.dtos.file.repository.file_repository_interface_dtos import (
@@ -13,7 +12,6 @@ from src.models.dtos.file.repository.file_repository_interface_dtos import (
     GetFileResponseDTO,
     UpdateFileCommandDTO,
     DeleteFileCommandDTO,
-    SearchFileQueryDTO,
     SearchFileResponseDTO,
 )
 from src.models.entities import FileEntity
@@ -44,14 +42,14 @@ class FilePostgresAdapter(SQLAlchemyFilterMixin):
 
         return GetFileResponseDTO.model_validate(obj=entity)
 
-    async def search_files(self, input_dto: SearchFileQueryDTO) -> SearchFileResponseDTO:
+    async def search_files(self) -> SearchFileResponseDTO:
         query: Select = select(FileEntity).where(FileEntity.is_deleted.is_(False))
 
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=FileEntity,
-            sort_info=input_dto.sort_info,
-            pagination=input_dto.pagination,
+            sort_info=None,
+            pagination=None,
         )
 
         return SearchFileResponseDTO(files=entities, total=total)

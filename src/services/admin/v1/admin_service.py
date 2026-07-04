@@ -1,13 +1,14 @@
 from uuid import UUID
 
-from archipy.models.errors import NotFoundError
+from archipy.models.errors import InvalidArgumentError, NotFoundError
 from dependency_injector.wiring import Provide, inject
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, File, Form, UploadFile
 
 from src.configs.containers import ServiceContainer
 from src.logics.admin.admin_logic import AdminLogic
 from src.logics.contact.contact_logic import ContactLogic
 from src.logics.content.content_logic import ContentLogic
+from src.logics.file.file_logic import FileLogic
 from src.models.dtos.admin.domain.v1.admin_domain_interface_dtos import (
     GetAdminInputDTOV1,
     GetAdminOutputDTOV1,
@@ -41,7 +42,14 @@ from src.models.dtos.content.domain.v1.content_domain_interface_dtos import (
     UpdateAboutInputDTOV1,
     DeleteAboutInputDTOV1,
 )
+from src.models.dtos.file.domain.v1.file_domain_interface_dtos import (
+    CreateFileOutputDTOV1,
+    CreateFileInputDTOV1,
+    UpdateFileInputDTOV1,
+    DeleteFileInputDTOV1,
+)
 from src.models.types.api_router_type import ApiRouterType
+from src.models.types.enums import FilePurposeType
 from src.utils.utils import Utils
 
 routerV1: APIRouter = APIRouter(tags=[ApiRouterType.ADMIN])
@@ -266,3 +274,47 @@ async def search_contact_messages(
     logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
 ) -> SearchContactMessageOutputDTOV1:
     return await logic.search_contact_messages()
+
+
+@routerV1.post(
+    path="/files",
+    response_model=CreateFileOutputDTOV1,
+    responses=Utils.get_fastapi_exception_responses([InvalidArgumentError]),
+)
+@inject
+async def create_file(
+    purpose_type: FilePurposeType = Form(...),
+    file: UploadFile = File(...),
+    logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
+) -> CreateFileOutputDTOV1:
+    content = await file.read()
+    input_dto = CreateFileInputDTOV1(file_name=file.filename, content=content, purpose_type=purpose_type)
+    return await logic.create_file(input_dto=input_dto)
+
+
+@routerV1.put(
+    path="/files/{file_uuid}",
+    responses=Utils.get_fastapi_exception_responses([NotFoundError, InvalidArgumentError]),
+)
+@inject
+async def update_file(
+    file_uuid: UUID,
+    file: UploadFile = File(...),
+    logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
+) -> None:
+    content = await file.read()
+    update_dto = UpdateFileInputDTOV1(file_uuid=file_uuid, file_name=file.filename, content=content)
+    await logic.update_file(input_dto=update_dto)
+
+
+@routerV1.delete(
+    path="/files/{file_uuid}",
+    responses=Utils.get_fastapi_exception_responses([NotFoundError]),
+)
+@inject
+async def delete_file(
+    file_uuid: UUID,
+    logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
+) -> None:
+    input_dto = DeleteFileInputDTOV1(file_uuid=file_uuid)
+    await logic.delete_file(input_dto=input_dto)

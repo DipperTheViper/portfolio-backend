@@ -13,6 +13,8 @@ class RuntimeConfig(BaseConfig):
     ADMIN_AUTH_LOGIN_CALLS_COUNT_LIMIT: int = 10
     ADMIN_AUTH_LOGIN_MINUTES_LIMIT: int = 1
     CONTACT_NOTIFICATION_RECIPIENT_EMAIL: str | None = None
+    FILE_STORAGE_DIR: str = "media/files"
+    FILE_MAX_UPLOAD_SIZE_BYTES: int = 10 * 1024 * 1024
 
 
 BaseConfig.set_global(RuntimeConfig())

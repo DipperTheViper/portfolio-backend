@@ -16,6 +16,7 @@ from src.repositories.contact.contact_repository import ContactRepository
 from src.repositories.content.adapters.content_postgres_adapter import ContentPostgresAdapter
 from src.repositories.content.content_repository import ContentRepository
 from src.repositories.file.adapters.file_postgres_adapter import FilePostgresAdapter
+from src.repositories.file.adapters.file_storage_adapter import FileStorageAdapter
 from src.repositories.file.file_repository import FileRepository
 
 
@@ -82,9 +83,15 @@ class ServiceContainer(containers.DeclarativeContainer):
         FilePostgresAdapter,
         adapter=_postgres_adapter,
     )
+    _file_storage_adapter = providers.ThreadSafeSingleton(
+        FileStorageAdapter,
+        storage_dir=_config.FILE_STORAGE_DIR,
+        max_size_bytes=_config.FILE_MAX_UPLOAD_SIZE_BYTES,
+    )
     _file_repository = providers.ThreadSafeSingleton(
         FileRepository,
         postgres_adapter=_file_postgres_adapter,
+        storage_adapter=_file_storage_adapter,
     )
     file_logic = providers.ThreadSafeSingleton(
         FileLogic,
