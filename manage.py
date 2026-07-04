@@ -1,11 +1,8 @@
 import logging
-import time
-import uvicorn
 
+import uvicorn
 from archipy.helpers.utils.app_utils import AppUtils
-from fastapi import FastAPI, APIRouter
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.requests import Request
+from fastapi import FastAPI
 
 from src.configs.containers import ServiceContainer
 from src.configs.dispatcher import set_dispatch_routes, set_admin_dispatch_routes

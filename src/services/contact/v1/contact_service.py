@@ -24,27 +24,25 @@ routerV1: APIRouter = APIRouter(tags=[ApiRouterType.CONTACT])
 
 
 @routerV1.post(
-    path="/{user_uuid}/contact-messages",
+    path="/contact-messages",
     response_model=CreateContactMessageOutputDTOV1,
 )
 @inject
 async def create_contact_message(
-    user_uuid: UUID,
     input_dto: CreateContactMessageRestInputDTOV1,
     logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
 ) -> CreateContactMessageOutputDTOV1:
-    input_dto = CreateContactMessageInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateContactMessageInputDTOV1.create(input_dto=input_dto)
     return await logic.create_contact_message(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/contact-messages/{contact_message_uuid}",
+    path="/contact-messages/{contact_message_uuid}",
     response_model=GetContactMessageOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_contact_message(
-    user_uuid: UUID,
     contact_message_uuid: UUID,
     logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
 ) -> GetContactMessageOutputDTOV1:
@@ -53,12 +51,11 @@ async def get_contact_message(
 
 
 @routerV1.get(
-    path="/{user_uuid}/contact-messages",
+    path="/contact-messages",
     response_model=SearchContactMessageOutputDTOV1,
 )
 @inject
 async def search_contact_messages(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
@@ -71,11 +68,10 @@ async def search_contact_messages(
 
 
 @routerV1.put(
-    path="/{user_uuid}/contact-messages/{contact_message_uuid}",
+    path="/contact-messages/{contact_message_uuid}",
 )
 @inject
 async def update_contact_message(
-    user_uuid: UUID,
     contact_message_uuid: UUID,
     input_dto: UpdateContactMessageRestInputDTOV1,
     logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
@@ -85,11 +81,10 @@ async def update_contact_message(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/contact-messages/{contact_message_uuid}",
+    path="/contact-messages/{contact_message_uuid}",
 )
 @inject
 async def delete_contact_message(
-    user_uuid: UUID,
     contact_message_uuid: UUID,
     logic: ContactLogic = Depends(Provide[ServiceContainer.contact_logic]),
 ) -> None:

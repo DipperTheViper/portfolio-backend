@@ -64,27 +64,25 @@ routerV1: APIRouter = APIRouter(tags=[ApiRouterType.CONTENT])
 
 
 @routerV1.post(
-    path="/{user_uuid}/abouts",
+    path="/abouts",
     response_model=CreateAboutOutputDTOV1,
 )
 @inject
 async def create_about(
-    user_uuid: UUID,
     input_dto: CreateAboutRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> CreateAboutOutputDTOV1:
-    input_dto = CreateAboutInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateAboutInputDTOV1.create(input_dto=input_dto)
     return await logic.create_about(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/abouts/{about_uuid}",
+    path="/abouts/{about_uuid}",
     response_model=GetAboutOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_about(
-    user_uuid: UUID,
     about_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> GetAboutOutputDTOV1:
@@ -93,12 +91,11 @@ async def get_about(
 
 
 @routerV1.get(
-    path="/{user_uuid}/abouts",
+    path="/abouts",
     response_model=SearchAboutOutputDTOV1,
 )
 @inject
 async def search_abouts(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -111,11 +108,10 @@ async def search_abouts(
 
 
 @routerV1.put(
-    path="/{user_uuid}/abouts/{about_uuid}",
+    path="/abouts/{about_uuid}",
 )
 @inject
 async def update_about(
-    user_uuid: UUID,
     about_uuid: UUID,
     input_dto: UpdateAboutRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -125,11 +121,10 @@ async def update_about(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/abouts/{about_uuid}",
+    path="/abouts/{about_uuid}",
 )
 @inject
 async def delete_about(
-    user_uuid: UUID,
     about_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> None:
@@ -138,27 +133,25 @@ async def delete_about(
 
 
 @routerV1.post(
-    path="/{user_uuid}/experiences",
+    path="/experiences",
     response_model=CreateExperienceOutputDTOV1,
 )
 @inject
 async def create_experience(
-    user_uuid: UUID,
     input_dto: CreateExperienceRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> CreateExperienceOutputDTOV1:
-    input_dto = CreateExperienceInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateExperienceInputDTOV1.create(input_dto=input_dto)
     return await logic.create_experience(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/experiences/{experience_uuid}",
+    path="/experiences/{experience_uuid}",
     response_model=GetExperienceOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_experience(
-    user_uuid: UUID,
     experience_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> GetExperienceOutputDTOV1:
@@ -167,12 +160,11 @@ async def get_experience(
 
 
 @routerV1.get(
-    path="/{user_uuid}/experiences",
+    path="/experiences",
     response_model=SearchExperienceOutputDTOV1,
 )
 @inject
 async def search_experiences(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -185,11 +177,10 @@ async def search_experiences(
 
 
 @routerV1.put(
-    path="/{user_uuid}/experiences/{experience_uuid}",
+    path="/experiences/{experience_uuid}",
 )
 @inject
 async def update_experience(
-    user_uuid: UUID,
     experience_uuid: UUID,
     input_dto: UpdateExperienceRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -199,11 +190,10 @@ async def update_experience(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/experiences/{experience_uuid}",
+    path="/experiences/{experience_uuid}",
 )
 @inject
 async def delete_experience(
-    user_uuid: UUID,
     experience_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> None:
@@ -212,27 +202,25 @@ async def delete_experience(
 
 
 @routerV1.post(
-    path="/{user_uuid}/honors",
+    path="/honors",
     response_model=CreateHonorOutputDTOV1,
 )
 @inject
 async def create_honor(
-    user_uuid: UUID,
     input_dto: CreateHonorRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> CreateHonorOutputDTOV1:
-    input_dto = CreateHonorInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateHonorInputDTOV1.create(input_dto=input_dto)
     return await logic.create_honor(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/honors/{honor_uuid}",
+    path="/honors/{honor_uuid}",
     response_model=GetHonorOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_honor(
-    user_uuid: UUID,
     honor_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> GetHonorOutputDTOV1:
@@ -241,12 +229,11 @@ async def get_honor(
 
 
 @routerV1.get(
-    path="/{user_uuid}/honors",
+    path="/honors",
     response_model=SearchHonorOutputDTOV1,
 )
 @inject
 async def search_honors(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -259,11 +246,10 @@ async def search_honors(
 
 
 @routerV1.put(
-    path="/{user_uuid}/honors/{honor_uuid}",
+    path="/honors/{honor_uuid}",
 )
 @inject
 async def update_honor(
-    user_uuid: UUID,
     honor_uuid: UUID,
     input_dto: UpdateHonorRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -273,11 +259,10 @@ async def update_honor(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/honors/{honor_uuid}",
+    path="/honors/{honor_uuid}",
 )
 @inject
 async def delete_honor(
-    user_uuid: UUID,
     honor_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> None:
@@ -286,27 +271,25 @@ async def delete_honor(
 
 
 @routerV1.post(
-    path="/{user_uuid}/projects",
+    path="/projects",
     response_model=CreateProjectOutputDTOV1,
 )
 @inject
 async def create_project(
-    user_uuid: UUID,
     input_dto: CreateProjectRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> CreateProjectOutputDTOV1:
-    input_dto = CreateProjectInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateProjectInputDTOV1.create(input_dto=input_dto)
     return await logic.create_project(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/projects/{project_uuid}",
+    path="/projects/{project_uuid}",
     response_model=GetProjectOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_project(
-    user_uuid: UUID,
     project_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> GetProjectOutputDTOV1:
@@ -315,12 +298,11 @@ async def get_project(
 
 
 @routerV1.get(
-    path="/{user_uuid}/projects",
+    path="/projects",
     response_model=SearchProjectOutputDTOV1,
 )
 @inject
 async def search_projects(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -333,11 +315,10 @@ async def search_projects(
 
 
 @routerV1.put(
-    path="/{user_uuid}/projects/{project_uuid}",
+    path="/projects/{project_uuid}",
 )
 @inject
 async def update_project(
-    user_uuid: UUID,
     project_uuid: UUID,
     input_dto: UpdateProjectRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -347,11 +328,10 @@ async def update_project(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/projects/{project_uuid}",
+    path="/projects/{project_uuid}",
 )
 @inject
 async def delete_project(
-    user_uuid: UUID,
     project_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> None:
@@ -360,27 +340,25 @@ async def delete_project(
 
 
 @routerV1.post(
-    path="/{user_uuid}/skills",
+    path="/skills",
     response_model=CreateSkillOutputDTOV1,
 )
 @inject
 async def create_skill(
-    user_uuid: UUID,
     input_dto: CreateSkillRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> CreateSkillOutputDTOV1:
-    input_dto = CreateSkillInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateSkillInputDTOV1.create(input_dto=input_dto)
     return await logic.create_skill(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/skills/{skill_uuid}",
+    path="/skills/{skill_uuid}",
     response_model=GetSkillOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_skill(
-    user_uuid: UUID,
     skill_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> GetSkillOutputDTOV1:
@@ -389,12 +367,11 @@ async def get_skill(
 
 
 @routerV1.get(
-    path="/{user_uuid}/skills",
+    path="/skills",
     response_model=SearchSkillOutputDTOV1,
 )
 @inject
 async def search_skills(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -407,11 +384,10 @@ async def search_skills(
 
 
 @routerV1.put(
-    path="/{user_uuid}/skills/{skill_uuid}",
+    path="/skills/{skill_uuid}",
 )
 @inject
 async def update_skill(
-    user_uuid: UUID,
     skill_uuid: UUID,
     input_dto: UpdateSkillRestInputDTOV1,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
@@ -421,11 +397,10 @@ async def update_skill(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/skills/{skill_uuid}",
+    path="/skills/{skill_uuid}",
 )
 @inject
 async def delete_skill(
-    user_uuid: UUID,
     skill_uuid: UUID,
     logic: ContentLogic = Depends(Provide[ServiceContainer.content_logic]),
 ) -> None:

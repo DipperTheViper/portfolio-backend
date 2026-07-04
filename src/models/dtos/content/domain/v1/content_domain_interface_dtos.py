@@ -16,17 +16,14 @@ class CreateAboutRestInputDTOV1(BaseDTO):
 
 
 class CreateAboutInputDTOV1(CreateAboutRestInputDTOV1):
-    user_uuid: UUID | None = None
-
     @classmethod
     def create(
         cls,
-        user_uuid: UUID | None = None,
         input_dto: CreateAboutRestInputDTOV1 = None,
     ):
         if input_dto:
-            return cls(user_uuid=user_uuid, **input_dto.model_dump(mode="json"))
-        return cls(user_uuid=user_uuid)
+            return cls(**input_dto.model_dump(mode="json"))
+        return cls()
 
 
 class CreateAboutOutputDTOV1(BaseDTO):
@@ -94,17 +91,14 @@ class CreateExperienceRestInputDTOV1(BaseDTO):
 
 
 class CreateExperienceInputDTOV1(CreateExperienceRestInputDTOV1):
-    user_uuid: UUID | None = None
-
     @classmethod
     def create(
         cls,
-        user_uuid: UUID | None = None,
         input_dto: CreateExperienceRestInputDTOV1 = None,
     ):
         if input_dto:
-            return cls(user_uuid=user_uuid, **input_dto.model_dump(mode="json"))
-        return cls(user_uuid=user_uuid)
+            return cls(**input_dto.model_dump(mode="json"))
+        return cls()
 
 
 class CreateExperienceOutputDTOV1(BaseDTO):
@@ -180,17 +174,14 @@ class CreateHonorRestInputDTOV1(BaseDTO):
 
 
 class CreateHonorInputDTOV1(CreateHonorRestInputDTOV1):
-    user_uuid: UUID | None = None
-
     @classmethod
     def create(
         cls,
-        user_uuid: UUID | None = None,
         input_dto: CreateHonorRestInputDTOV1 = None,
     ):
         if input_dto:
-            return cls(user_uuid=user_uuid, **input_dto.model_dump(mode="json"))
-        return cls(user_uuid=user_uuid)
+            return cls(**input_dto.model_dump(mode="json"))
+        return cls()
 
 
 class CreateHonorOutputDTOV1(BaseDTO):
@@ -267,17 +258,14 @@ class CreateProjectRestInputDTOV1(BaseDTO):
 
 
 class CreateProjectInputDTOV1(CreateProjectRestInputDTOV1):
-    user_uuid: UUID | None = None
-
     @classmethod
     def create(
         cls,
-        user_uuid: UUID | None = None,
         input_dto: CreateProjectRestInputDTOV1 = None,
     ):
         if input_dto:
-            return cls(user_uuid=user_uuid, **input_dto.model_dump(mode="json"))
-        return cls(user_uuid=user_uuid)
+            return cls(**input_dto.model_dump(mode="json"))
+        return cls()
 
 
 class CreateProjectOutputDTOV1(BaseDTO):
@@ -361,17 +349,14 @@ class CreateSkillRestInputDTOV1(BaseDTO):
 
 
 class CreateSkillInputDTOV1(CreateSkillRestInputDTOV1):
-    user_uuid: UUID | None = None
-
     @classmethod
     def create(
         cls,
-        user_uuid: UUID | None = None,
         input_dto: CreateSkillRestInputDTOV1 = None,
     ):
         if input_dto:
-            return cls(user_uuid=user_uuid, **input_dto.model_dump(mode="json"))
-        return cls(user_uuid=user_uuid)
+            return cls(**input_dto.model_dump(mode="json"))
+        return cls()
 
 
 class CreateSkillOutputDTOV1(BaseDTO):

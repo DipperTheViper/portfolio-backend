@@ -47,14 +47,6 @@ class FilePostgresAdapter(SQLAlchemyFilterMixin):
     async def search_files(self, input_dto: SearchFileQueryDTO) -> SearchFileResponseDTO:
         query: Select = select(FileEntity).where(FileEntity.is_deleted.is_(False))
 
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=FileEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
-
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=FileEntity,

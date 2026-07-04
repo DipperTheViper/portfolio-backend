@@ -50,14 +50,6 @@ class ContactPostgresAdapter(SQLAlchemyFilterMixin):
     async def search_contact_messages(self, input_dto: SearchContactMessageQueryDTO) -> SearchContactMessageResponseDTO:
         query: Select = select(ContactMessageEntity).where(ContactMessageEntity.is_deleted.is_(False))
 
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=ContactMessageEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
-
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=ContactMessageEntity,

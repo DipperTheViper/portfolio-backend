@@ -24,27 +24,25 @@ routerV1: APIRouter = APIRouter(tags=[ApiRouterType.ADMIN])
 
 
 @routerV1.post(
-    path="/{user_uuid}/admins",
+    path="/admins",
     response_model=CreateAdminOutputDTOV1,
 )
 @inject
 async def create_admin(
-    user_uuid: UUID,
     input_dto: CreateAdminRestInputDTOV1,
     logic: AdminLogic = Depends(Provide[ServiceContainer.admin_logic]),
 ) -> CreateAdminOutputDTOV1:
-    input_dto = CreateAdminInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateAdminInputDTOV1.create(input_dto=input_dto)
     return await logic.create_admin(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/admins/{admin_uuid}",
+    path="/admins/{admin_uuid}",
     response_model=GetAdminOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_admin(
-    user_uuid: UUID,
     admin_uuid: UUID,
     logic: AdminLogic = Depends(Provide[ServiceContainer.admin_logic]),
 ) -> GetAdminOutputDTOV1:
@@ -53,12 +51,11 @@ async def get_admin(
 
 
 @routerV1.get(
-    path="/{user_uuid}/admins",
+    path="/admins",
     response_model=SearchAdminOutputDTOV1,
 )
 @inject
 async def search_admins(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: AdminLogic = Depends(Provide[ServiceContainer.admin_logic]),
@@ -71,11 +68,10 @@ async def search_admins(
 
 
 @routerV1.put(
-    path="/{user_uuid}/admins/{admin_uuid}",
+    path="/admins/{admin_uuid}",
 )
 @inject
 async def update_admin(
-    user_uuid: UUID,
     admin_uuid: UUID,
     input_dto: UpdateAdminRestInputDTOV1,
     logic: AdminLogic = Depends(Provide[ServiceContainer.admin_logic]),
@@ -85,11 +81,10 @@ async def update_admin(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/admins/{admin_uuid}",
+    path="/admins/{admin_uuid}",
 )
 @inject
 async def delete_admin(
-    user_uuid: UUID,
     admin_uuid: UUID,
     logic: AdminLogic = Depends(Provide[ServiceContainer.admin_logic]),
 ) -> None:

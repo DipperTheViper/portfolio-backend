@@ -79,14 +79,6 @@ class ContentPostgresAdapter(SQLAlchemyFilterMixin):
     async def search_abouts(self, input_dto: SearchAboutQueryDTO) -> SearchAboutResponseDTO:
         query: Select = select(AboutEntity).where(AboutEntity.is_deleted.is_(False))
 
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=AboutEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
-
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=AboutEntity,
@@ -151,14 +143,6 @@ class ContentPostgresAdapter(SQLAlchemyFilterMixin):
 
     async def search_experiences(self, input_dto: SearchExperienceQueryDTO) -> SearchExperienceResponseDTO:
         query: Select = select(ExperienceEntity).where(ExperienceEntity.is_deleted.is_(False))
-
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=ExperienceEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
 
         entities, total = await self._adapter.execute_search_query(
             query=query,
@@ -225,14 +209,6 @@ class ContentPostgresAdapter(SQLAlchemyFilterMixin):
     async def search_honors(self, input_dto: SearchHonorQueryDTO) -> SearchHonorResponseDTO:
         query: Select = select(HonorEntity).where(HonorEntity.is_deleted.is_(False))
 
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=HonorEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
-
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=HonorEntity,
@@ -298,14 +274,6 @@ class ContentPostgresAdapter(SQLAlchemyFilterMixin):
     async def search_projects(self, input_dto: SearchProjectQueryDTO) -> SearchProjectResponseDTO:
         query: Select = select(ProjectEntity).where(ProjectEntity.is_deleted.is_(False))
 
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=ProjectEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
-
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=ProjectEntity,
@@ -370,14 +338,6 @@ class ContentPostgresAdapter(SQLAlchemyFilterMixin):
 
     async def search_skills(self, input_dto: SearchSkillQueryDTO) -> SearchSkillResponseDTO:
         query: Select = select(SkillEntity).where(SkillEntity.is_deleted.is_(False))
-
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=SkillEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
 
         entities, total = await self._adapter.execute_search_query(
             query=query,

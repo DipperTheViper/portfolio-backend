@@ -64,14 +64,6 @@ class AdminPostgresAdapter(SQLAlchemyFilterMixin):
     async def search_admins(self, input_dto: SearchAdminQueryDTO) -> SearchAdminResponseDTO:
         query: Select = select(AdminEntity).where(AdminEntity.is_deleted.is_(False))
 
-        if input_dto.user_uuid:
-            query = self._apply_filter(
-                query=query,
-                field=AdminEntity.user_uuid,
-                value=input_dto.user_uuid,
-                operation=FilterOperationType.EQUAL,
-            )
-
         entities, total = await self._adapter.execute_search_query(
             query=query,
             entity=AdminEntity,

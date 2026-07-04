@@ -17,17 +17,14 @@ class CreateAdminRestInputDTOV1(BaseDTO):
 
 
 class CreateAdminInputDTOV1(CreateAdminRestInputDTOV1):
-    user_uuid: UUID | None = None
-
     @classmethod
     def create(
         cls,
-        user_uuid: UUID | None = None,
         input_dto: CreateAdminRestInputDTOV1 = None,
     ):
         if input_dto:
-            return cls(user_uuid=user_uuid, **input_dto.model_dump(mode="json"))
-        return cls(user_uuid=user_uuid)
+            return cls(**input_dto.model_dump(mode="json"))
+        return cls()
 
 
 class CreateAdminOutputDTOV1(BaseDTO):

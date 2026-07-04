@@ -24,27 +24,25 @@ routerV1: APIRouter = APIRouter(tags=[ApiRouterType.FILE])
 
 
 @routerV1.post(
-    path="/{user_uuid}/files",
+    path="/files",
     response_model=CreateFileOutputDTOV1,
 )
 @inject
 async def create_file(
-    user_uuid: UUID,
     input_dto: CreateFileRestInputDTOV1,
     logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
 ) -> CreateFileOutputDTOV1:
-    input_dto = CreateFileInputDTOV1.create(user_uuid=user_uuid, input_dto=input_dto)
+    input_dto = CreateFileInputDTOV1.create(input_dto=input_dto)
     return await logic.create_file(input_dto=input_dto)
 
 
 @routerV1.get(
-    path="/{user_uuid}/files/{file_uuid}",
+    path="/files/{file_uuid}",
     response_model=GetFileOutputDTOV1,
     responses=Utils.get_fastapi_exception_responses([NotFoundError]),
 )
 @inject
 async def get_file(
-    user_uuid: UUID,
     file_uuid: UUID,
     logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
 ) -> GetFileOutputDTOV1:
@@ -53,12 +51,11 @@ async def get_file(
 
 
 @routerV1.get(
-    path="/{user_uuid}/files",
+    path="/files",
     response_model=SearchFileOutputDTOV1,
 )
 @inject
 async def search_files(
-    user_uuid: UUID,
     page: int = Query(default=1, ge=1, description="Page number"),
     page_size: int = Query(default=10, ge=1, le=100, description="Number of items per page"),
     logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
@@ -71,11 +68,10 @@ async def search_files(
 
 
 @routerV1.put(
-    path="/{user_uuid}/files/{file_uuid}",
+    path="/files/{file_uuid}",
 )
 @inject
 async def update_file(
-    user_uuid: UUID,
     file_uuid: UUID,
     input_dto: UpdateFileRestInputDTOV1,
     logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
@@ -85,11 +81,10 @@ async def update_file(
 
 
 @routerV1.delete(
-    path="/{user_uuid}/files/{file_uuid}",
+    path="/files/{file_uuid}",
 )
 @inject
 async def delete_file(
-    user_uuid: UUID,
     file_uuid: UUID,
     logic: FileLogic = Depends(Provide[ServiceContainer.file_logic]),
 ) -> None:
