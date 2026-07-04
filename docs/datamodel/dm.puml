@@ -1,0 +1,116 @@
+@startuml dm
+
+hide circle
+skinparam linetype ortho
+
+entity "AdminEntity" as admin {
+  * admin_uuid : UUID <<PK>>
+  --
+  * username : VARCHAR(50) <<unique>>
+  * hashed_password : VARCHAR(255)
+  * is_active : BOOLEAN
+}
+
+entity "ProjectEntity" as project {
+  * project_uuid : UUID <<PK>>
+  --
+  * display_order : INTEGER
+  * title : VARCHAR(150)
+  * date_range : VARCHAR(50)
+  * company : VARCHAR(100)
+  * role : VARCHAR(100)
+  * description : TEXT
+  * tech_tags : VARCHAR[]
+  * stats : JSONB
+}
+
+entity "SkillEntity" as skill {
+  * skill_uuid : UUID <<PK>>
+  --
+  * group_name : SkillGroupType
+  * name : VARCHAR(50)
+  * display_order : INTEGER
+}
+
+entity "ExperienceEntity" as experience {
+  * experience_uuid : UUID <<PK>>
+  --
+  * display_order : INTEGER
+  * date_range : VARCHAR(50)
+  * role : VARCHAR(100)
+  * company : VARCHAR(100)
+  * description : TEXT
+}
+
+entity "HonorEntity" as honor {
+  * honor_uuid : UUID <<PK>>
+  --
+  * display_order : INTEGER
+  * figure : VARCHAR(20)
+  * title : VARCHAR(150)
+  * detail : VARCHAR(255)
+}
+
+entity "AboutEntity" as about {
+  * about_uuid : UUID <<PK>>
+  --
+  * lead : TEXT
+  * body : TEXT
+}
+
+entity "ContactMessageEntity" as contact {
+  * contact_message_uuid : UUID <<PK>>
+  --
+  * name : VARCHAR(100)
+  * email : VARCHAR(255)
+  * message : TEXT
+  * is_read : BOOLEAN
+}
+
+entity "FileEntity" as file {
+  * file_uuid : UUID <<PK>>
+  --
+  * file_name : VARCHAR(255)
+  * path : VARCHAR(255)
+  * file_type : FileType
+  * purpose_type : FilePurposeType
+  --
+  created_by : UUID <<FK>>
+  updated_by : UUID <<FK>>
+}
+
+admin ||--o{ file : "creates/updates"
+
+note bottom of project
+  Public app: GET only (list/search/get)
+  Admin app: full CRUD, behind AdminAuthenticator
+end note
+
+note bottom of skill
+  Same public/admin split as project
+end note
+
+note bottom of experience
+  Same public/admin split as project
+end note
+
+note bottom of honor
+  Same public/admin split as project
+end note
+
+note bottom of about
+  Singleton row. Public: GET.
+  Admin: update only.
+end note
+
+note bottom of contact
+  Public: POST only (create).
+  Admin: get/search (read inbox), no public read.
+end note
+
+note bottom of admin
+  Not exposed publicly.
+  Used only by admin-side auth/login.
+end note
+
+@enduml

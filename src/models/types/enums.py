@@ -1,0 +1,23 @@
+from enum import Enum
+
+
+class UpdateStatusType(str, Enum):
+    LATEST_UPDATE = "LATEST_UPDATE"
+    OPTIONAL_UPDATE = "OPTIONAL_UPDATE"
+    FORCE_UPDATE = "FORCE_UPDATE"
+
+
+class FileType(str, Enum):
+    DOCUMENT = "DOCUMENT"
+    IMAGE = "IMAGE"
+
+
+class FilePurposeType(str, Enum):
+    RESUME = "RESUME"
+
+
+class SkillGroupType(str, Enum):
+    LANGUAGES_FRAMEWORKS = "LANGUAGES_FRAMEWORKS"
+    DATABASES_MESSAGING = "DATABASES_MESSAGING"
+    TOOLS_PLATFORMS = "TOOLS_PLATFORMS"
+    ARCHITECTURE_PRACTICES = "ARCHITECTURE_PRACTICES"
