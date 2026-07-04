@@ -12,6 +12,7 @@ class RuntimeConfig(BaseConfig):
     AUTH_VERIFY_TOTP_MINUTES_LIMIT: int = 1
     ADMIN_AUTH_LOGIN_CALLS_COUNT_LIMIT: int = 10
     ADMIN_AUTH_LOGIN_MINUTES_LIMIT: int = 1
+    CONTACT_NOTIFICATION_RECIPIENT_EMAIL: str | None = None
 
 
 BaseConfig.set_global(RuntimeConfig())

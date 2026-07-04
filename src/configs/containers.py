@@ -2,6 +2,7 @@ from archipy.adapters.postgres.sqlalchemy.adapters import AsyncPostgresSQLAlchem
 from archipy.adapters.redis.adapters import AsyncRedisAdapter
 from dependency_injector import containers, providers
 
+from src.repositories.contact.adapters.smtp_email_adapter import SmtpEmailAdapter
 from src.configs.runtime_config import RuntimeConfig
 from src.logics.admin.admin_logic import AdminLogic
 from src.logics.auth.auth_logic import AuthLogic
@@ -23,6 +24,7 @@ class ServiceContainer(containers.DeclarativeContainer):
     _config: RuntimeConfig = RuntimeConfig.global_config()
     _postgres_adapter: AsyncPostgresSQLAlchemyAdapter = providers.ThreadSafeSingleton(AsyncPostgresSQLAlchemyAdapter)
     _redis_adapter: AsyncRedisAdapter = providers.ThreadSafeSingleton(AsyncRedisAdapter)
+    _email_adapter: SmtpEmailAdapter = providers.ThreadSafeSingleton(SmtpEmailAdapter, config=_config.EMAIL)
     # endregion
 
     # region admin
@@ -56,6 +58,7 @@ class ServiceContainer(containers.DeclarativeContainer):
     contact_logic = providers.ThreadSafeSingleton(
         ContactLogic,
         repository=_contact_repository,
+        email_adapter=_email_adapter,
     )
     # endregion
 
