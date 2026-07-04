@@ -28,7 +28,7 @@ routerV1 = APIRouter(tags=[ApiRouterType.ADMIN_AUTH])
 )
 @inject
 async def login(
-    data: LoginInputDTOV1 = Body(default={"username": "admin", "password": "123456789"}),
+    data: LoginInputDTOV1 = Body(default={"username": "admin", "password": "1234"}),
     auth_logic: AuthLogic = Depends(Provide[ServiceContainer.auth_logic]),
 ) -> LoginOutputDTOV1:
     return await auth_logic.login(input_dto=data)

@@ -4,7 +4,6 @@ from archipy.models.errors import NotFoundError
 from src.logics.admin.admin_logic import AdminLogic
 from src.models.dtos.admin.domain.v1.admin_domain_interface_dtos import (
     GetAdminByUsernameInputDTOV1,
-    GetAdminOutputDTOV1,
     GetAdminByUsernameOutputDTOV1,
 )
 from src.models.dtos.auth.domain_interface.v1.auth_domain_interface_dtos import (
